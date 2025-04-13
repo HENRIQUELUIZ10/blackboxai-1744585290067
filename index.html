@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Manutenção Preventiva</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-blue-600 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold">
+                        <i class="fas fa-tools mr-2"></i>
+                        ManutençãoPRO
+                    </span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="index.html" class="bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                        <a href="new-maintenance.html" class="hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Nova Manutenção</a>
+                        <a href="technicians.html" class="hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Técnicos</a>
+                        <a href="calendar.html" class="hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Calendário</a>
+                        <a href="reports.html" class="hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Relatórios</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <!-- Welcome Banner -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Bem-vindo ao Sistema de Manutenção Preventiva</h1>
+            <p class="text-gray-600">Gerencie suas manutenções preventivas de forma eficiente e organizada.</p>
+        </div>
+
+        <!-- Dashboard Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            <!-- Total Maintenance Card -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center">
+                    <div class="p-3 bg-blue-100 rounded-full">
+                        <i class="fas fa-clipboard-list text-blue-600 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="text-sm font-medium text-gray-600">Total de Manutenções</h2>
+                        <p class="text-2xl font-semibold text-gray-900">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Maintenance Card -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center">
+                    <div class="p-3 bg-yellow-100 rounded-full">
+                        <i class="fas fa-clock text-yellow-600 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="text-sm font-medium text-gray-600">Manutenções Pendentes</h2>
+                        <p class="text-2xl font-semibold text-gray-900">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Completed Maintenance Card -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center">
+                    <div class="p-3 bg-green-100 rounded-full">
+                        <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="text-sm font-medium text-gray-600">Manutenções Concluídas</h2>
+                        <p class="text-2xl font-semibold text-gray-900">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Available Technicians Card -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center">
+                    <div class="p-3 bg-purple-100 rounded-full">
+                        <i class="fas fa-users text-purple-600 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="text-sm font-medium text-gray-600">Técnicos Disponíveis</h2>
+                        <p class="text-2xl font-semibold text-gray-900">0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Ações Rápidas</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <a href="new-maintenance.html" class="flex items-center p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+                    <i class="fas fa-plus-circle text-blue-600 text-xl mr-3"></i>
+                    <span class="text-blue-600 font-medium">Nova Manutenção</span>
+                </a>
+                <a href="technicians.html" class="flex items-center p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
+                    <i class="fas fa-user-plus text-purple-600 text-xl mr-3"></i>
+                    <span class="text-purple-600 font-medium">Adicionar Técnico</span>
+                </a>
+                <a href="calendar.html" class="flex items-center p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
+                    <i class="fas fa-calendar-alt text-green-600 text-xl mr-3"></i>
+                    <span class="text-green-600 font-medium">Ver Calendário</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Recent Maintenance Table -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Manutenções Recentes</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Título</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Local</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 text-sm text-gray-500" colspan="5">
+                                Nenhuma manutenção registrada
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow-inner mt-8">
+        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-gray-500 text-sm">
+                © 2024 Sistema de Manutenção Preventiva. Todos os direitos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>
