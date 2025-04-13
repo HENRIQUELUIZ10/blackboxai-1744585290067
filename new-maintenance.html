@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Manutenção - Sistema de Manutenção Preventiva</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-blue-600 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-xl font-bold">
+                        <i class="fas fa-tools mr-2"></i>
+                        ManutençãoPRO
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="index.html" class="hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                        <a href="new-maintenance.html" class="bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Nova Manutenção</a>
+                        <a href="technicians.html" class="hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Técnicos</a>
+                        <a href="calendar.html" class="hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Calendário</a>
+                        <a href="reports.html" class="hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Relatórios</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <!-- Page Header -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h1 class="text-3xl font-bold text-gray-900">Nova Manutenção Preventiva</h1>
+            <p class="text-gray-600 mt-1">Preencha os dados para cadastrar uma nova manutenção preventiva.</p>
+        </div>
+
+        <!-- Maintenance Form -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <form id="maintenanceForm" class="space-y-6">
+                <!-- Basic Information -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="title" class="block text-sm font-medium text-gray-700">Título da Manutenção*</label>
+                        <input type="text" id="title" name="title" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="date" class="block text-sm font-medium text-gray-700">Data Prevista*</label>
+                        <input type="date" id="date" name="date" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <!-- Periodicity and Location -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="periodicity" class="block text-sm font-medium text-gray-700">Periodicidade</label>
+                        <select id="periodicity" name="periodicity"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            <option value="">Selecione a periodicidade</option>
+                            <option value="daily">Diária</option>
+                            <option value="weekly">Semanal</option>
+                            <option value="biweekly">Quinzenal</option>
+                            <option value="monthly">Mensal</option>
+                            <option value="quarterly">Trimestral</option>
+                            <option value="semiannual">Semestral</option>
+                            <option value="annual">Anual</option>
+                            <option value="custom">Personalizada</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="location" class="block text-sm font-medium text-gray-700">Local/Área*</label>
+                        <input type="text" id="location" name="location" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <!-- Custom Periodicity (hidden by default) -->
+                <div id="customPeriodicityContainer" class="hidden">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="customValue" class="block text-sm font-medium text-gray-700">Intervalo</label>
+                            <input type="number" id="customValue" name="customValue" min="1"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="customUnit" class="block text-sm font-medium text-gray-700">Unidade</label>
+                            <select id="customUnit" name="customUnit"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <option value="days">Dias</option>
+                                <option value="weeks">Semanas</option>
+                                <option value="months">Meses</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technician Selection -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Técnicos Responsáveis*</label>
+                    <div class="mt-1 border border-gray-300 rounded-md p-4">
+                        <div id="selectedTechnicians" class="flex flex-wrap gap-2 mb-3">
+                            <!-- Selected technicians will be displayed here -->
+                        </div>
+                        <button type="button" id="addTechnician"
+                            class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            <i class="fas fa-plus mr-2"></i>
+                            Adicionar Técnico
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <label for="description" class="block text-sm font-medium text-gray-700">Descrição da Manutenção*</label>
+                    <textarea id="description" name="description" rows="4" required
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
+                </div>
+
+                <!-- Additional Notes -->
+                <div>
+                    <label for="notes" class="block text-sm font-medium text-gray-700">Observações Adicionais</label>
+                    <textarea id="notes" name="notes" rows="3"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="flex justify-end space-x-3">
+                    <button type="button" onclick="window.location.href='index.html'"
+                        class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                        class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <i class="fas fa-save mr-2"></i>
+                        Salvar Manutenção
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Technician Selection Modal -->
+    <div id="technicianModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-medium">Selecionar Técnico</h3>
+                <button id="closeTechnicianModal" class="text-gray-400 hover:text-gray-500">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="space-y-2" id="technicianList">
+                <!-- Technician list will be populated here -->
+                <div class="p-2 hover:bg-gray-100 rounded cursor-pointer">
+                    <p class="font-medium">João Silva</p>
+                    <p class="text-sm text-gray-600">Especialidade: Elétrica</p>
+                </div>
+                <div class="p-2 hover:bg-gray-100 rounded cursor-pointer">
+                    <p class="font-medium">Maria Santos</p>
+                    <p class="text-sm text-gray-600">Especialidade: Mecânica</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow-inner mt-8">
+        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-gray-500 text-sm">
+                © 2024 Sistema de Manutenção Preventiva. Todos os direitos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Show/hide custom periodicity fields based on selection
+        document.getElementById('periodicity').addEventListener('change', function() {
+            const customContainer = document.getElementById('customPeriodicityContainer');
+            customContainer.style.display = this.value === 'custom' ? 'block' : 'none';
+        });
+
+        // Technician modal functionality
+        const technicianModal = document.getElementById('technicianModal');
+        const addTechnicianBtn = document.getElementById('addTechnician');
+        const closeTechnicianModal = document.getElementById('closeTechnicianModal');
+
+        addTechnicianBtn.addEventListener('click', () => {
+            technicianModal.classList.remove('hidden');
+        });
+
+        closeTechnicianModal.addEventListener('click', () => {
+            technicianModal.classList.add('hidden');
+        });
+
+        // Form submission
+        document.getElementById('maintenanceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add form submission logic here
+            alert('Manutenção cadastrada com sucesso!');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
