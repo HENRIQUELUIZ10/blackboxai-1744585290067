@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Técnicos - Sistema de Manutenção Preventiva</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-blue-600 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-xl font-bold">
+                        <i class="fas fa-tools mr-2"></i>
+                        ManutençãoPRO
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="index.html" class="hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                        <a href="new-maintenance.html" class="hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Nova Manutenção</a>
+                        <a href="technicians.html" class="bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Técnicos</a>
+                        <a href="calendar.html" class="hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Calendário</a>
+                        <a href="reports.html" class="hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Relatórios</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <!-- Page Header -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Gerenciar Técnicos</h1>
+                    <p class="text-gray-600 mt-1">Cadastre e gerencie os técnicos responsáveis pelas manutenções.</p>
+                </div>
+                <button id="addTechnicianBtn" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    <i class="fas fa-plus mr-2"></i>
+                    Novo Técnico
+                </button>
+            </div>
+        </div>
+
+        <!-- Technicians List -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Nome
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Especialidade
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Contato
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Status
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Ações
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200" id="techniciansList">
+                        <!-- Example row -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10">
+                                        <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
+                                            <i class="fas fa-user text-gray-500"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">João Silva</div>
+                                        <div class="text-sm text-gray-500">ID: #001</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Mecânica Industrial</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">(11) 98765-4321</div>
+                                <div class="text-sm text-gray-500">joao.silva@email.com</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                    Disponível
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <button class="text-blue-600 hover:text-blue-900 mr-3" onclick="editTechnician('1')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="text-red-600 hover:text-red-900" onclick="deleteTechnician('1')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add/Edit Technician Modal -->
+    <div id="technicianModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+        <div class="relative top-20 mx-auto p-5 border w-full max-w-md shadow-lg rounded-md bg-white">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-medium" id="modalTitle">Adicionar Novo Técnico</h3>
+                <button id="closeTechnicianModal" class="text-gray-400 hover:text-gray-500">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="technicianForm" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Nome Completo*</label>
+                    <input type="text" id="name" name="name" required
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="specialty" class="block text-sm font-medium text-gray-700">Especialidade*</label>
+                    <input type="text" id="specialty" name="specialty" required
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700">Telefone*</label>
+                    <input type="tel" id="phone" name="phone" required
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">E-mail*</label>
+                    <input type="email" id="email" name="email" required
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="availability" class="block text-sm font-medium text-gray-700">Disponibilidade</label>
+                    <select id="availability" name="availability"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                        <option value="available">Disponível</option>
+                        <option value="busy">Ocupado</option>
+                        <option value="vacation">Em Férias</option>
+                        <option value="leave">Licença</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="notes" class="block text-sm font-medium text-gray-700">Observações</label>
+                    <textarea id="notes" name="notes" rows="3"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
+                </div>
+                <div class="flex justify-end space-x-3 mt-4">
+                    <button type="button" id="cancelTechnicianBtn"
+                        class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Salvar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3 text-center">
+                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+                    <i class="fas fa-exclamation-triangle text-red-600"></i>
+                </div>
+                <h3 class="text-lg leading-6 font-medium text-gray-900 mt-4">Confirmar Exclusão</h3>
+                <div class="mt-2 px-7 py-3">
+                    <p class="text-sm text-gray-500">
+                        Tem certeza que deseja excluir este técnico? Esta ação não pode ser desfeita.
+                    </p>
+                </div>
+                <div class="flex justify-center space-x-3 mt-4">
+                    <button id="cancelDelete"
+                        class="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                        Cancelar
+                    </button>
+                    <button id="confirmDelete"
+                        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                        Excluir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow-inner mt-8">
+        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-gray-500 text-sm">
+                © 2024 Sistema de Manutenção Preventiva. Todos os direitos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Modal handling
+        const technicianModal = document.getElementById('technicianModal');
+        const deleteModal = document.getElementById('deleteModal');
+        const addTechnicianBtn = document.getElementById('addTechnicianBtn');
+        const closeTechnicianModal = document.getElementById('closeTechnicianModal');
+        const cancelTechnicianBtn = document.getElementById('cancelTechnicianBtn');
+        const cancelDelete = document.getElementById('cancelDelete');
+        const confirmDelete = document.getElementById('confirmDelete');
+
+        // Show add technician modal
+        addTechnicianBtn.addEventListener('click', () => {
+            document.getElementById('modalTitle').textContent = 'Adicionar Novo Técnico';
+            technicianModal.classList.remove('hidden');
+        });
+
+        // Close technician modal
+        function closeTechnicianModalFn() {
+            technicianModal.classList.add('hidden');
+            document.getElementById('technicianForm').reset();
+        }
+
+        closeTechnicianModal.addEventListener('click', closeTechnicianModalFn);
+        cancelTechnicianBtn.addEventListener('click', closeTechnicianModalFn);
+
+        // Close delete modal
+        function closeDeleteModal() {
+            deleteModal.classList.add('hidden');
+        }
+
+        cancelDelete.addEventListener('click', closeDeleteModal);
+        confirmDelete.addEventListener('click', () => {
+            // Add delete logic here
+            closeDeleteModal();
+        });
+
+        // Edit technician
+        function editTechnician(id) {
+            document.getElementById('modalTitle').textContent = 'Editar Técnico';
+            technicianModal.classList.remove('hidden');
+            // Add logic to populate form with technician data
+        }
+
+        // Delete technician
+        function deleteTechnician(id) {
+            deleteModal.classList.remove('hidden');
+        }
+
+        // Form submission
+        document.getElementById('technicianForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add form submission logic here
+            alert('Técnico salvo com sucesso!');
+            closeTechnicianModalFn();
+        });
+    </script>
+</body>
+</html>
